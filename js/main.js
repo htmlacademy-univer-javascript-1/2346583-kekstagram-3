@@ -1,12 +1,12 @@
 function getRandomInt(min, max) { //from https://stackoverflow.com/questions/1527803/generating-random-whole-numbers-in-javascript-in-a-specific-range
   if (min > max){
-    let t = min;
+    const t = min;
     min = max;
     max = t;
   }
   min = Math.ceil(min);
   max = Math.floor(max);
-  if (min == max) return min;
+  if (min === max) { return min; }
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
