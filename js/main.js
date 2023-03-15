@@ -4,7 +4,7 @@ function getRandomInt(min, max) { //from https://stackoverflow.com/questions/152
   }
   min = Math.ceil(min);
   max = Math.floor(max);
-  if (min === max) { return min; }
+  if (min === max) { return min; };
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
@@ -15,13 +15,13 @@ function checkLength(string, length) {
   return string.length <= length;
 }
 
-let usedIDs = [];
+const usedIDs = [];
 
 const createPhoto = () => {
   let i = getRandomInt(1, 25);
   while (usedIDs.indexOf(i) != -1) {
     i = getRandomInt(1, 25);
-  }
+  };
   usedIDs.push(i);
   return {
     id: i,
@@ -29,7 +29,7 @@ const createPhoto = () => {
     description: "Photo number ${i}",
     likes: getRandomInt(15, 200),
     comments: getRandomInt(0, 200),
-  }
+  };
 }
 
 const photos = Array.from({length: 25}, createPhoto);
