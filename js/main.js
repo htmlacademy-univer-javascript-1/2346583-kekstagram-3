@@ -1,5 +1,5 @@
 function getRandomInt(min, max) { //from https://stackoverflow.com/questions/1527803/generating-random-whole-numbers-in-javascript-in-a-specific-range
-  if (min > max){
+  if (min > max || min < 0 || max < 0){
     return 0;
   }
   min = Math.ceil(min);
