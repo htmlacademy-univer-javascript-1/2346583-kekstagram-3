@@ -1,4 +1,5 @@
 {
+
   "name": "kekstagram",
   "version": "26.0.0",
   "private": true,
@@ -7,6 +8,7 @@
     "type": "git",
     "url": "git@github.com:htmlacademy-univer-javascript-1/2346583-kekstagram-3.git"
   },
+  "type": "module",
   "bugs": {
     "url": "https://github.com/htmlacademy-univer-javascript-1/2346583-kekstagram-3/issues"
   },
