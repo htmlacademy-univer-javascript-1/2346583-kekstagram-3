@@ -18,3 +18,4 @@ export function checkLength(string, length) {
   }
   return string.length <= length;
 }
+
