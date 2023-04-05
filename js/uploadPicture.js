@@ -1,3 +1,4 @@
+import {pristine} from "./validation.js";
 const pictureUploadForm = document.querySelector('#upload-select-image');
 
 const pictureUploadOverlay = pictureUploadForm.querySelector('.img-upload__overlay');
@@ -20,9 +21,11 @@ pictureInput.addEventListener('change', function(evt) {
 // close modal
 overlayCloseButton.addEventListener('click', function(evt) {
   closeImageUploadModal();
+  pristine.reset();
 });
 document.addEventListener('keydown', function(evt) {
   if (evt.key == "Escape") closeImageUploadModal();
+  pristine.reset();
 })
 
 pictureUploadForm.addEventListener('submit', function(evt) {
