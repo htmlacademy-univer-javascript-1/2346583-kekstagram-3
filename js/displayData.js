@@ -35,12 +35,13 @@ const createPictureFromData = ({url, description, comments, likes}) => {
   pictureInfoContainer.append(createPictureElements(comments, likes));
 
   pictureDetailLink.append(picturePreveiw, pictureInfoContainer);
+  return pictureDetailLink;
 }
 
 
 
 export const displayData = (data) => {
-  var fragment =  document.createDocumentFragment();
+  var fragment = document.createDocumentFragment();
 
   fragment = data.map((picture) => {createPictureFromData(picture)});
 
