@@ -48,5 +48,3 @@ export const displayData = (data) => {
   const container = document.querySelector('.pictures');
   container.appendChild(fragment);
 }
-
-
