@@ -35,7 +35,7 @@ const createPictureFromData = ({url, description, comments, likes}) => {
   pictureInfoContainer.append(createPictureElements(comments, likes));
 
   pictureDetailLink.append(picturePreveiw, pictureInfoContainer);
-  return pictureDetailLink;
+
 }
 
 
