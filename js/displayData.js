@@ -24,9 +24,6 @@ const createPictureElements = (comments, likes) => {
 }
 
 const createPictureFromData = ({url, description, comments, likes}) => {
-  const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
-  const pictureElement = pictureTemplate.cloneNode(true);
-
   const pictureDetailLink = document.createElement('a');
   pictureDetailLink.setAttribute('href', '#');
   pictureDetailLink.classList.add('picture');
@@ -38,8 +35,7 @@ const createPictureFromData = ({url, description, comments, likes}) => {
   pictureInfoContainer.append(createPictureElements(comments, likes));
 
   pictureDetailLink.append(picturePreveiw, pictureInfoContainer);
-  pictureElement.append(pictureDetailLink);
-  return pictureElement;
+  return pictureDetailLink;
 }
 
 
@@ -50,5 +46,5 @@ export const displayData = (data) => {
   fragment = data.map((picture) => {createPictureFromData(picture)});
 
   const container = document.querySelector('.pictures');
-  container.appendChild(fragment);
+  container.append(fragment);
 }
