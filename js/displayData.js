@@ -40,7 +40,7 @@ const createPictureFromData = ({url, description, comments, likes}) => {
 
 
 export const displayData = (data) => {
-  const fragment = new DocumentFragment();
+  var fragment = new DocumentFragment();
 
   fragment = data.map((picture) => {createPictureFromData(picture)});
 
