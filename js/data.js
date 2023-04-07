@@ -10,8 +10,8 @@ export const createPhoto = () => {
   usedIDs.push(i);
   return {
     id: i,
-    url: "photos/${i}.jpg",
-    description: "Photo number ${i}",
+    url: `photos/${i}.jpg`,
+    description: `Photo number ${i}`,
     likes: getRandomInt(15, 200),
     comments: getRandomInt(0, 200),
   };
