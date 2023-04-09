@@ -1,8 +1,9 @@
 import {pristine} from "./validation.js";
+import {onEffectButtonClick, setEffect, createSlider, destroySlider} from './editPicture.js';
+
 const pictureUploadForm = document.querySelector('#upload-select-image');
 const preview = document.querySelector('.img-upload__preview img');
 const pictureUploadOverlay = pictureUploadForm.querySelector('.img-upload__overlay');
-var onEditorEscKeydown;
 const pictureInput = pictureUploadForm.querySelector('#upload-file');
 const overlayCloseButton = pictureUploadForm.querySelector('#upload-cancel');
 const effects = editor.querySelector('.effects__list');
@@ -29,7 +30,6 @@ pictureInput.addEventListener('change', function(evt) {
   };
   fileReader.readAsDataURL(uploadedImage);
 
-  onEditorEscKeydown = escKeydownHandler(document, closeEditor);
   effects.addEventListener('change', onEffectButtonClick);
   scaleSmallerButton.addEventListener('click', onControlSmallerButtonClick);
   scaleBiggerButton.addEventListener('click', onControlBiggerButtonClick);
@@ -38,10 +38,16 @@ pictureInput.addEventListener('change', function(evt) {
 // close modal
 overlayCloseButton.addEventListener('click', function(evt) {
   closeImageUploadModal();
+  destroySlider();
+  setEffect('none');
+  setPictureScale(100);
   pristine.reset();
 });
 document.addEventListener('keydown', function(evt) {
   if (evt.key == "Escape") closeImageUploadModal();
+  destroySlider();
+  setEffect('none');
+  setPictureScale(100);
   pristine.reset();
 })
 
