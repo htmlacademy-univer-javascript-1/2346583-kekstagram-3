@@ -19,3 +19,26 @@ export function checkLength(string, length) {
   return string.length <= length;
 }
 
+export function escKeydownHandler(element, onKeydownFunction) {
+  function eventHandler(evt) {
+    if (isEscapeKey(evt)) {
+      evt.preventDefault();
+      onKeydownFunction();
+    }
+  }
+  element.addEventListener('keydown', eventHandler);
+
+  return eventHandler;
+}
+
+export function anotherAreaClickHandler(element, selector, onClickFunction) {
+  function eventHandler(evt) {
+    if (evt.target === document.querySelector(selector)) {
+      onClickFunction();
+    }
+  }
+  element.addEventListener('click', eventHandler);
+
+  return eventHandler;
+}
+

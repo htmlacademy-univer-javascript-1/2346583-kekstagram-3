@@ -1,51 +1,25 @@
-const createPicturePreview = (url, description) => {
-  const picturePreveiw= document.createElement('img');
+import { onPictureClick } from "./showBigPicture.js";
 
-  picturePreveiw.classList.add('picture__img');
-  picturePreveiw.setAttribute('src', url);
-  picturePreveiw.setAttribute('width', 182);
-  picturePreveiw.setAttribute('height', 182);
-  picturePreveiw.setAttribute('alt', description);
+const createPictureFromData = ({url, description, comments, likes}, pictureTemplate) => {
+  const pictureElement = pictureTemplate.cloneNode(true);
+  const pictureImage = pictureElement.querySelector('.picture__img');
+  const pictureComments = pictureElement.querySelector('.picture__comments');
+  const pictureLikes = pictureElement.querySelector('.picture__likes');
+  pictureImage.src = url;
+  pictureImage.alt = description;
+  pictureComments.textContent = comments;
+  pictureLikes.textContent = likes;
 
-  return picturePreveiw;
-}
-
-const createPictureElements = (comments, likes) => {
-
-  const commentCount = document.createElement('span');
-  commentCount.classList.add('picture__comments');
-  commentCount.append(comments);
-
-  const likeCount = document.createElement('span');
-  likeCount.classList.add('picture__likes');
-  likeCount.append(likes);
-
-  return(commentCount, likeCount);
-}
-
-const createPictureFromData = ({url, description, comments, likes}) => {
-  const pictureDetailLink = document.createElement('a');
-  pictureDetailLink.setAttribute('href', '#');
-  pictureDetailLink.classList.add('picture');
-
-  const picturePreveiw = createPicturePreview(url, description);
-
-  const pictureInfoContainer = document.createElement('p');
-  pictureInfoContainer.classList.add('picture__info');
-  pictureInfoContainer.append(createPictureElements(comments, likes));
-
-  pictureDetailLink.append(picturePreveiw, pictureInfoContainer);
+  return pictureElement;
 }
 
 
 
 export const displayData = (data) => {
-  const fragment = new DocumentFragment();
-
-  fragment = data.map((picture) => {createPictureFromData(picture)});
-
+  const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
+  const fragment = document.createDocumentFragment();
+  for (var i = 0; i < data.length; i++) fragment.append(createPictureFromData(data[i], pictureTemplate));
   const container = document.querySelector('.pictures');
-  container.appendChild(fragment);
+  container.append(fragment);
+  container.addEventListener('click', onPictureClick);
 }
-
-
