@@ -1,4 +1,4 @@
-
+import { onPictureClick } from "./showBigPicture";
 
 const createPictureFromData = ({url, description, comments, likes}, pictureTemplate) => {
   const pictureElement = pictureTemplate.cloneNode(true);
@@ -21,4 +21,5 @@ export const displayData = (data) => {
   for (var i = 0; i < data.length; i++) fragment.append(createPictureFromData(data[i], pictureTemplate));
   const container = document.querySelector('.pictures');
   container.append(fragment);
+  container.addEventListener('click', onPictureClick);
 }
