@@ -1,5 +1,5 @@
 const form = document.querySelector('#upload-select-image');
-const pristine = new Pristine(form, {
+export const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
   errorTextTag: 'span',
@@ -52,5 +52,3 @@ form.addEventListener('submit', (evt) => {
     form.submit();
   }
 });
-
-export {pristine};
