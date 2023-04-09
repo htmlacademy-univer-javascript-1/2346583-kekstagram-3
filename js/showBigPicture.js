@@ -9,6 +9,7 @@ const bigPictureComments = bigPictureSection.querySelector('.comments-count');
 const bigPictureCloseButton = bigPictureSection.querySelector('.big-picture__cancel');
 const authorComment = bigPictureSection.querySelector('.social__caption');
 
+
 export function onPictureClick(evt) {
   const element = evt.target.closest('.picture');
   if (element) {
