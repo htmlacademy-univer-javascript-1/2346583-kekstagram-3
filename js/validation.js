@@ -52,3 +52,42 @@ form.addEventListener('submit', (evt) => {
     form.submit();
   }
 });
+
+const submitButton = form.querySelector('#upload-submit');
+
+function blockSubmitButton() {
+  submitButton.disabled = true;
+  submitButton.textContent = 'Загружаю...';
+}
+
+function unblockSubmitButton() {
+  submitButton.disabled = false;
+  submitButton.textContent = 'Опубликовать';
+}
+
+import { sendData } from "./api";
+import { convertDataToInformation } from "./util";
+
+export function submitForm(onSuccess) {
+  form.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    const isValid = pristine.validate();
+    if (isValid) {
+      blockSubmitButton();
+      const sentInformation = new FormData(evt.target);
+      sendData(
+        () => {
+          addPicture(convertDataToInformation(sentInformation));
+          showSuccessMessage();
+          unblockSubmitButton();
+          onSuccess();
+        },
+        () => {
+          showErrorMessage();
+          unblockSubmitButton();
+        },
+        sentInformation,
+      );
+    }
+  });
+}

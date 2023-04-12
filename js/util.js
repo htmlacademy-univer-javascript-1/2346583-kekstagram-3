@@ -42,3 +42,19 @@ export function anotherAreaClickHandler(element, selector, onClickFunction) {
   return eventHandler;
 }
 
+function addPrewiewInformation(information) {
+  const prewiew = document.querySelector('.img-upload__preview img');
+  information.src = prewiew.src;
+  information.scale = prewiew.style.transform;
+  information.class = prewiew.classList[0];
+  information.filter = prewiew.style.filter;
+}
+
+export function convertDataToInformation(formData) {
+  const information = {
+    description: formData.get('description'),
+    hashtags: formData.get('hashtags')
+  };
+  addPrewiewInformation(information);
+  return information;
+}
