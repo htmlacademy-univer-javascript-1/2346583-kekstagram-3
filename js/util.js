@@ -31,6 +31,10 @@ export function escKeydownHandler(element, onKeydownFunction) {
   return eventHandler;
 }
 
+function isEscapeKey(evt) {
+  return evt.key === 'Escape';
+}
+
 export function anotherAreaClickHandler(element, selector, onClickFunction) {
   function eventHandler(evt) {
     if (evt.target === document.querySelector(selector)) {
@@ -58,8 +62,6 @@ export function convertDataToInformation(formData) {
   addPrewiewInformation(information);
   return information;
 }
-
-import {escKeydownHandler, anotherAreaClickHandler} from './util.js';
 
 const body = document.querySelector('body');
 const successMessageTemplate = body.querySelector('#success').content.querySelector('.success');

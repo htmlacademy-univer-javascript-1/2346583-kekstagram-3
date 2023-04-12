@@ -1,9 +1,8 @@
-import { createPhoto } from "./data.js";
 import { displayData } from "./displayData.js";
 import { loadPictures } from "./api.js";
+import { submitForm } from "./validation.js";
+import { closeImageUploadModal } from "./uploadPicture.js";
 import './uploadPicture.js';
-
-const photos = Array.from({length: 25}, createPhoto);
 
 
 loadPictures(
@@ -15,4 +14,4 @@ loadPictures(
   }
 );
 
-submitForm(closeEditor);
+submitForm(closeImageUploadModal);

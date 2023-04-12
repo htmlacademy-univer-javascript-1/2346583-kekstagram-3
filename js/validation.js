@@ -45,14 +45,6 @@ pristine.addValidator(
   'Неверный формат ХэшТегов'
 );
 
-form.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-
-  if (pristine.validate()) {
-    form.submit();
-  }
-});
-
 const submitButton = form.querySelector('#upload-submit');
 
 function blockSubmitButton() {
@@ -65,8 +57,9 @@ function unblockSubmitButton() {
   submitButton.textContent = 'Опубликовать';
 }
 
-import { sendData } from "./api";
-import { convertDataToInformation, showErrorMessage, showSuccessMessage } from "./util";
+import { sendData } from "./api.js";
+import { convertDataToInformation, showErrorMessage, showSuccessMessage } from "./util.js";
+import { addPicture } from "./displayData.js"
 
 export function submitForm(onSuccess) {
   form.addEventListener('submit', (evt) => {
@@ -75,9 +68,11 @@ export function submitForm(onSuccess) {
     if (isValid) {
       blockSubmitButton();
       const sentInformation = new FormData(evt.target);
+      console.log(evt.target);
       sendData(
         () => {
           addPicture(convertDataToInformation(sentInformation));
+          console.log("nenavizhu negrov")
           showSuccessMessage();
           unblockSubmitButton();
           onSuccess();
