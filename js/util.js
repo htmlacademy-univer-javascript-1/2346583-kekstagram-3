@@ -58,3 +58,54 @@ export function convertDataToInformation(formData) {
   addPrewiewInformation(information);
   return information;
 }
+
+import {escKeydownHandler, anotherAreaClickHandler} from './util.js';
+
+const body = document.querySelector('body');
+const successMessageTemplate = body.querySelector('#success').content.querySelector('.success');
+const errorMessageTemplate = body.querySelector('#error').content.querySelector('.error');
+let onMessageEscKeydown;
+let onAnotherAreaClick;
+
+export function showSuccessMessage() {
+  const successMessage = successMessageTemplate.cloneNode(true);
+  const successButton = successMessage.querySelector('.success__button');
+
+  successButton.addEventListener('click', closeSuccessMessage);
+  onMessageEscKeydown = escKeydownHandler(document, closeSuccessMessage);
+  onAnotherAreaClick = anotherAreaClickHandler(document, '.success', closeSuccessMessage);
+  body.append(successMessage);
+  successMessage.style.zIndex = '9999';
+}
+
+export function showErrorMessage() {
+  const errorMessage = errorMessageTemplate.cloneNode(true);
+  const errorButton = errorMessage.querySelector('.error__button');
+  errorButton.textContent = 'Закрыть';
+
+  errorButton.addEventListener('click', closeErrorMessage);
+  onMessageEscKeydown = escKeydownHandler(document, closeErrorMessage);
+  onAnotherAreaClick = anotherAreaClickHandler(document, '.error', closeErrorMessage);
+  body.append(errorMessage);
+  errorMessage.style.zIndex = '9999';
+}
+
+function closeSuccessMessage() {
+  const successButton = body.querySelector('.success__button');
+
+  successButton.removeEventListener('click', closeSuccessMessage);
+  document.removeEventListener('click', onAnotherAreaClick);
+  document.removeEventListener('keydown', onMessageEscKeydown);
+
+  body.querySelector('.success').remove();
+}
+
+function closeErrorMessage() {
+  const errorButton = body.querySelector('.error__button');
+
+  errorButton.removeEventListener('click', closeErrorMessage);
+  document.removeEventListener('click', onAnotherAreaClick);
+  document.removeEventListener('keydown', onMessageEscKeydown);
+
+  body.querySelector('.error').remove();
+}

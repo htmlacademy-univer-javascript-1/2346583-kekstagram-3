@@ -66,7 +66,7 @@ function unblockSubmitButton() {
 }
 
 import { sendData } from "./api";
-import { convertDataToInformation } from "./util";
+import { convertDataToInformation, showErrorMessage, showSuccessMessage } from "./util";
 
 export function submitForm(onSuccess) {
   form.addEventListener('submit', (evt) => {
