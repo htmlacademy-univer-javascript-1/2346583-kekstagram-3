@@ -10,7 +10,7 @@ const effects = document.querySelector('.effects__list');
 const scaleSmallerButton = document.querySelector('.scale__control--smaller');
 const scaleBiggerButton = document.querySelector('.scale__control--bigger');
 
-function closeImageUploadModal() {
+export function closeImageUploadModal() {
   pictureUploadOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
   setEffect('none');
@@ -44,9 +44,3 @@ overlayCloseButton.addEventListener('click', function(evt) {
 document.addEventListener('keydown', function(evt) {
   if (evt.key == "Escape") closeImageUploadModal();
 })
-
-pictureUploadForm.addEventListener('submit', function(evt) {
-  evt.preventDefault();
-  pictureUploadForm.submit();
-  closeImageUploadModal();
-});

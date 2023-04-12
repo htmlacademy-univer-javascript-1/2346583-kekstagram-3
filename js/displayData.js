@@ -23,3 +23,20 @@ export const displayData = (data) => {
   container.append(fragment);
   container.addEventListener('click', onPictureClick);
 }
+
+export function addPicture(information) {
+  const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
+  const picture = pictureTemplate.cloneNode(true);
+  const pictureImage = picture.querySelector('.picture__img');
+  const pictureComments = picture.querySelector('.picture__comments');
+  const pictureLikes = picture.querySelector('.picture__likes');
+  pictureComments.textContent = 0;
+  pictureLikes.textContent = 0;
+
+  pictureImage.src = information.src;
+  pictureImage.alt = `${information.description} ${information.hashtags}`;
+  pictureImage.style.transform = information.scale;
+  pictureImage.classList.add(information.class);
+  pictureImage.style.filter = information.filter;
+  document.querySelector('.pictures').append(picture);
+}

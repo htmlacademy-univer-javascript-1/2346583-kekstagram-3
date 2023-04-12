@@ -1,4 +1,4 @@
-import {escKeydownHandler, anotherAreaClickHandler} from './util.js';
+import {escKeydownHandler, anotherAreaClickHandler, getRandomInt} from './util.js';
 
 let onBigPictureEscKeydown;
 let onAnotherAreaClick;
@@ -31,6 +31,17 @@ export function onPictureClick(evt) {
 
     onBigPictureEscKeydown = escKeydownHandler(document, closeBigPicture);
     onAnotherAreaClick = anotherAreaClickHandler(document, '.big-picture', closeBigPicture);
+
+    const commentForm = document.querySelector('.social__footer');
+    const sentButton = commentForm.querySelector('.social__footer-btn');
+    sentButton.addEventListener('click', (evt) => {
+      const newComment = document.querySelector('.social__comment').cloneNode(true);
+      const avatar = newComment.querySelector('.social__picture');
+      avatar.src = document.querySelector('.social__footer').querySelector('.social__picture').src;
+      const commentText = newComment.querySelector('.social__text');
+      commentText.textContent = commentForm.querySelector('.social__footer-text').value;
+      document.querySelector('.social__comments').append(newComment);
+    })
   }
 }
 

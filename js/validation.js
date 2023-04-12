@@ -45,10 +45,44 @@ pristine.addValidator(
   'Неверный формат ХэшТегов'
 );
 
-form.addEventListener('submit', (evt) => {
-  evt.preventDefault();
+const submitButton = form.querySelector('#upload-submit');
 
-  if (pristine.validate()) {
-    form.submit();
-  }
-});
+function blockSubmitButton() {
+  submitButton.disabled = true;
+  submitButton.textContent = 'Загружаю...';
+}
+
+function unblockSubmitButton() {
+  submitButton.disabled = false;
+  submitButton.textContent = 'Опубликовать';
+}
+
+import { sendData } from "./api.js";
+import { convertDataToInformation, showErrorMessage, showSuccessMessage } from "./util.js";
+import { addPicture } from "./displayData.js"
+
+export function submitForm(onSuccess) {
+  form.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    const isValid = pristine.validate();
+    if (isValid) {
+      blockSubmitButton();
+      const sentInformation = new FormData(evt.target);
+      console.log(evt.target);
+      sendData(
+        () => {
+          addPicture(convertDataToInformation(sentInformation));
+          console.log("nenavizhu negrov")
+          showSuccessMessage();
+          unblockSubmitButton();
+          onSuccess();
+        },
+        () => {
+          showErrorMessage();
+          unblockSubmitButton();
+        },
+        sentInformation,
+      );
+    }
+  });
+}
